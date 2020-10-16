@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Logo</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li *ngIf="isAppAdmin()" class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="restrita"
+        >Lista Restrita</a
+      >
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="publico"
+        >Lista Publica</a
+      >
+    </li>
+    <li *ngIf="isAppManager()" class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="privado"
+        >Lista Privada</a
+      >
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <!-- Dropdown -->
+    <li class="nav-item dropdown" *ngIf="!this.isAuth">
+      <a class="nav-link" (click)="onLogin()">Login</a>
+    </li>
+
+    <li class="nav-item dropdown" *ngIf="this.isAuth">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="navbardrop"
+        data-toggle="dropdown"
+        href="/sso/login"
+        >{{ userInformations.preferred_username }}</a
+      >
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="onLogout()">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
